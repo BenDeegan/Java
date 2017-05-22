@@ -17,6 +17,8 @@ import javax.swing.JTextPane;
 import java.awt.TextArea;
 import java.awt.Color;
 import java.awt.SystemColor;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
 public class BankGUI {
 
@@ -34,9 +36,10 @@ public class BankGUI {
 	JButton btnWithdrawAll;
 	private JTextField accNumTXT;
 	private JButton btnNext;
-	private boolean isNext = true;
 	int i;
 	private JButton btnExit;
+	JCheckBox checkCurrent;
+	JCheckBox checkStudent;
 
 	/**
 	 * Launch the application.
@@ -133,8 +136,18 @@ public class BankGUI {
 				for (int i = 0; i < accounts.size(); i++) {
 					if (accounts.get(i).getAccNum() == Integer.parseInt(accNumTXT.getText())) {
 						AccDetails.setText(accounts.get(i).toString());
-						// System.out.println(accounts.get(i).toString());
 					}
+					if(checkCurrent.isSelected()){
+						if (accounts.get(i).getAccNum() == Integer.parseInt(accNumTXT.getText())) {
+							accounts.get(i).setAccType(BankAcc.current);
+						}
+					}
+					if(checkStudent.isSelected() == true){
+						if (accounts.get(i).getAccNum() == Integer.parseInt(accNumTXT.getText())) {
+							accounts.get(i).setAccType(BankAcc.student);
+						}
+					}
+
 
 				}
 
@@ -221,12 +234,7 @@ public class BankGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				i = 0;
 
-				// if(isNext == true && i <= max){
-				// AccDetails.set
 				AccDetails.setText(accounts.get(i).toString());
-				// i++;
-				// System.out.println(i);
-				// }
 
 			}
 		});
@@ -238,21 +246,12 @@ public class BankGUI {
 			public void actionPerformed(ActionEvent e) {
 				i++;
 				int max = accounts.size();
-				if (i == 0) {
+				if (i < max) {
 					AccDetails.setText(accounts.get(i).toString());
-					//i++;
-
-				} else if (i < max) {
-
+				} else if (i > max) {
+					i = 0;
 					AccDetails.setText(accounts.get(i).toString());
-					//i++;
-					System.out.println(i + " in next");
 				}
-
-				if (i > max) {
-					System.out.println("error");
-				}
-
 			}
 		});
 		btnNext.setBounds(498, 343, 89, 23);
@@ -261,17 +260,13 @@ public class BankGUI {
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(i + "in prev");
 				int max = accounts.size();
-				if (i == max) {
-					i--;
-
-				}
-
+				i--;
 				if (i > 0) {
-					i--;
 					AccDetails.setText(accounts.get(i).toString());
-
+				} else if (i == 0) {
+					AccDetails.setText(accounts.get(i).toString());
+					i = max;
 				}
 			}
 		});
@@ -286,5 +281,17 @@ public class BankGUI {
 		});
 		btnExit.setBounds(627, 11, 89, 23);
 		frame.getContentPane().add(btnExit);
+
+		checkStudent = new JCheckBox("Student");
+		checkStudent.setBounds(26, 168, 97, 23);
+		frame.getContentPane().add(checkStudent);
+
+
+		checkCurrent = new JCheckBox("Current");
+		checkCurrent.setBounds(26, 194, 97, 23);
+		frame.getContentPane().add(checkCurrent);
+		checkCurrent.setSelected(false);
+
+
 	}
 }

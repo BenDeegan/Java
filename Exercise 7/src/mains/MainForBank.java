@@ -4,10 +4,10 @@ import classes.BankAcc;
 
 public class MainForBank {
 	public static void main(String[] args) {
-		BankAcc b1 = new BankAcc("Ben", "Swords");
-		BankAcc b2 = new BankAcc("Steff", "Finglas");
-		BankAcc b3 = new BankAcc("Shane", "Dublin");
-		BankAcc b4 = new BankAcc("Liam", "Swords");
+		BankAcc b1 = new BankAcc("Ben", "Swords", BankAcc.current);
+		BankAcc b2 = new BankAcc("Steff", "Finglas", BankAcc.student);
+		BankAcc b3 = new BankAcc("Shane", "Dublin", BankAcc.current);
+		BankAcc b4 = new BankAcc("Liam", "Swords", BankAcc.student);
 		
 		BankAcc [] arr = new BankAcc []{b1,b2,b3,b4};
 		print(arr);

@@ -7,6 +7,10 @@ public class BankAcc {
 	private String address;
 	private int accNum;
 	private double bal;
+	private int accType;
+	public static final int current = 1;
+	public static final int student  = 2;
+	
 	public static final float interestR = 2f;
 	public static int counter = 1000;
 	
@@ -15,10 +19,11 @@ public class BankAcc {
 		counter++;
 	}
 	
-	public BankAcc(String name, String address){
+	public BankAcc(String name, String address, int accType){
 		this();
 		setName(name);
 		setAddress(address);
+		this.accType = accType;
 	}
 	
 	public double deposit(double depo){
@@ -78,10 +83,16 @@ public class BankAcc {
 	public static int getCounter() {
 		return counter;
 	}
+	public int getAccType() {
+		return accType;
+	}
+	public void setAccType(int accType) {
+		this.accType = accType;
+	}
 
 	
 	public String toString() {
-		return "BankAcc #" + accNum +  "[name=" + name + ", address=" + address + ", accNum=" + accNum + ", bal=" + bal + "]";
+		return "BankAcc #" + accNum +  "[name=" + name + ", address=" + address + ", accNum=" + accNum + ", bal=" + bal +   "acc Type=" + accType + "]";
 	}
 	
 	
