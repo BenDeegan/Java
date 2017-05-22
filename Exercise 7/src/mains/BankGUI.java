@@ -13,6 +13,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
+import java.awt.TextArea;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class BankGUI {
 
@@ -20,8 +24,8 @@ public class BankGUI {
 	private JTextField textField;
 	private JTextField textField_1;
 	private boolean isMade = false;
-	private JTextField textDetails;
-	private boolean isWanted = false;
+	private JTextField AccDetails;
+	
 	
 	private JTextField textFieldDep;
 	JButton btnSubmit;
@@ -29,6 +33,11 @@ public class BankGUI {
 	JButton btnDeposit;
 	JButton btnWithdraw;
 	JButton btnWithdrawAll;
+	private JTextField accNumTXT;
+	private JButton btnNext;
+	private boolean isNext = true;
+	int i;
+	private JButton btnExit;
 	
 	
 
@@ -60,6 +69,7 @@ public class BankGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(SystemColor.controlShadow);
 		frame.setBounds(100, 100, 742, 542);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -73,6 +83,8 @@ public class BankGUI {
 				isMade = true;
 				if(isMade == true && !textField.getText().isEmpty() && !textField_1.getText().isEmpty()){
 					btnSubmit.setVisible(true);
+					
+					
 				}
 				
 				
@@ -118,23 +130,30 @@ public class BankGUI {
 			
 			}
 		});
-		btnSubmit.setBounds(10, 124, 86, 23);
+		btnSubmit.setBounds(37, 124, 86, 23);
 		frame.getContentPane().add(btnSubmit);
 		
 		btnGetDetails = new JButton("Get Details");
 		btnGetDetails.setVisible(false);
 		btnGetDetails.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textDetails.setText(accounts.get(0).toString());
+				for (int i = 0; i < accounts.size(); i++) {
+					if(accounts.get(i).getAccNum() == Integer.parseInt(accNumTXT.getText())){
+						AccDetails.setText(accounts.get(i).toString());
+						//System.out.println(accounts.get(i).toString());
+					}
+					
+				}
+				
 			}
 		});
-		btnGetDetails.setBounds(98, 124, 89, 23);
+		btnGetDetails.setBounds(261, 124, 89, 23);
 		frame.getContentPane().add(btnGetDetails);
 		
-		textDetails = new JTextField();
-		textDetails.setBounds(32, 399, 667, 93);
-		frame.getContentPane().add(textDetails);
-		textDetails.setColumns(10);
+		AccDetails = new JTextField();
+		AccDetails.setBounds(32, 399, 667, 93);
+		frame.getContentPane().add(AccDetails);
+		AccDetails.setColumns(10);
 		
 		textFieldDep = new JTextField();
 		textFieldDep.addActionListener(new ActionListener() {
@@ -156,7 +175,12 @@ public class BankGUI {
 		btnDeposit.setVisible(false);
 		btnDeposit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				accounts.get(0).deposit(Double.parseDouble(textFieldDep.getText())); 
+				for (int i = 0; i < accounts.size(); i++) {
+					if(accounts.get(i).getAccNum() == Integer.parseInt(accNumTXT.getText())){
+						accounts.get(i).deposit(Double.parseDouble(textFieldDep.getText())); 
+					}
+				}
+				
 			}
 		});
 		btnDeposit.setBounds(434, 92, 89, 23);
@@ -166,7 +190,13 @@ public class BankGUI {
 		btnWithdraw.setVisible(false);
 		btnWithdraw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				accounts.get(0).withdraw(Double.parseDouble(textFieldDep.getText()));
+				for (int i = 0; i < accounts.size(); i++) {
+					if(accounts.get(i).getAccNum() == Integer.parseInt(accNumTXT.getText())){
+						accounts.get(i).withdraw(Double.parseDouble(textFieldDep.getText()));
+					}
+					
+				}
+				
 			}
 		});
 		btnWithdraw.setBounds(533, 92, 89, 23);
@@ -176,10 +206,101 @@ public class BankGUI {
 		btnWithdrawAll.setVisible(false);
 		btnWithdrawAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				accounts.get(0).withdrawAll();
+				for (int i = 0; i < accounts.size(); i++) {
+					if(accounts.get(i).getAccNum() == Integer.parseInt(accNumTXT.getText())){
+				accounts.get(i).withdrawAll();
+			}
+				}
 			}
 		});
 		btnWithdrawAll.setBounds(434, 124, 188, 23);
 		frame.getContentPane().add(btnWithdrawAll);
+		
+		accNumTXT = new JTextField();
+		accNumTXT.setBounds(261, 93, 89, 20);
+		frame.getContentPane().add(accNumTXT);
+		accNumTXT.setColumns(10);
+		
+		JLabel lblAccNum = new JLabel("Account Number");
+		lblAccNum.setBounds(261, 65, 89, 14);
+		frame.getContentPane().add(lblAccNum);
+		
+		JButton btnGetAll = new JButton("Get All Accounts");
+		btnGetAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				i = 0;
+				
+				//if(isNext == true && i <= max){
+					//AccDetails.set
+					AccDetails.setText(accounts.get(i).toString());
+					//i++;
+					//System.out.println(i);
+				//}
+				
+				
+				
+				
+					
+					
+			}
+		});
+		btnGetAll.setBounds(247, 343, 177, 23);
+		frame.getContentPane().add(btnGetAll);
+		
+		btnNext = new JButton("Next");
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int max = accounts.size();
+				if(i==0){
+					AccDetails.setText(accounts.get(i+1).toString());
+					i++;
+					
+				} else if(i<max){
+					
+					AccDetails.setText(accounts.get(i).toString());
+					i++;
+					System.out.println(i + " in next");
+				}
+			
+				
+				
+				if(i>max){
+					System.out.println("error");
+				}
+				
+			}
+		});
+		btnNext.setBounds(498, 343, 89, 23);
+		frame.getContentPane().add(btnNext);
+		
+		JButton btnPrevious = new JButton("Previous");
+		btnPrevious.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(i + "in prev");
+				int max = accounts.size();
+				if(i == max){
+					i--;
+					
+				}
+
+
+				if(i>0){
+					i--;
+					AccDetails.setText(accounts.get(i).toString());
+					
+				}
+			}
+		});
+		btnPrevious.setBounds(37, 343, 89, 23);
+		frame.getContentPane().add(btnPrevious);
+		
+		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnExit.setBounds(627, 11, 89, 23);
+		frame.getContentPane().add(btnExit);
 	}
 }
