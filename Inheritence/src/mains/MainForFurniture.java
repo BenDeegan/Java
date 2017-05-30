@@ -8,10 +8,15 @@ import classes.Table;
 public class MainForFurniture {
 	public static void main(String[] args) {
 		Furniture f1 = new Furniture();
-		Chair c1 = new Chair(true,c1.ARM_CHAIR);
-		Table t1  = new Table();
-		Bed b1 = new Bed();
+		Table t1  = new Table(true, Table.Shape.CIRCLE, Table.DARK_OAK, Table.WOOD);
+		Bed b1 = new Bed(true, Bed.Size.BUNK, Bed.MAHOGANY, Bed.GLASS);
+		Chair c1 = new Chair(true, Chair.Type.STOOL, Chair.LIGHT_OAK, Chair.METAL);
+		System.out.println(c1.toString());
 		
+		
+		//System.out.println(c1.toString());
+		
+		//System.out.println(f1.toString());
 		
 	}
 
