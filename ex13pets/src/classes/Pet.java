@@ -16,7 +16,7 @@ public class Pet {
 		this.isMale = isMale;
 		this.name = name;
 	}
-
+	
 	public String getName() {
 		return name;
 	}

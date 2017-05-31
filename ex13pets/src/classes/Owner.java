@@ -16,6 +16,32 @@ public class Owner {
 		this.phone = phone;
 		this.pets = pets;
 	}
+	
+	public String makeCatWalk(){
+		String s = "";
+		for (Pet pet : pets) {
+			if(pet instanceof Cat){
+				Cat cat = (Cat)pet;
+				s = cat.walk() + "\n";
+			}
+		}
+		return s;
+	}
+	
+	public String makeDogWalk(){
+		String s = "";
+		for(Pet pet: pets){
+			if(pet instanceof Dog){
+			Dog dog = (Dog)pet;
+			s = dog.walk() + "\n";
+		
+	}
+		}
+		return s;
+			
+	}
+		
+
 
 	public String getName() {
 		return name;
