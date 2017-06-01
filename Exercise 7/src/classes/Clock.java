@@ -11,10 +11,15 @@ public class Clock {
 		minutes = 0;
 	}
 	
-	public Clock(int hours, int seconds, int minutes){
-		setHours(hours);
-		setMinutes(minutes);
-		setSeconds(seconds);
+	public Clock(int hours, int seconds, int minutes) throws InvalidTimeException{
+		if(hours >=0 && hours <=23 && minutes >=0 && minutes <=59 && seconds >=0 && seconds <=59){
+			setHours(hours);
+			setMinutes(minutes);
+			setSeconds(seconds);
+		}else{
+			throw new InvalidTimeException("Time not valid");
+		}
+		
 	}
 	
 	public void increment(int hour, int second, int minute){

@@ -17,7 +17,7 @@ public class Employee {
 		setName(name);
 	}
 	
-	public Employee(String name, int age, double salary, int numSickDays){
+	public Employee(String name, int age, double salary, int numSickDays) throws InvalidAgeException{
 		this();
 		setAge(age);
 		setName(name);
@@ -39,8 +39,13 @@ public class Employee {
 	public int getAge() {
 		return age;
 	}
-	public void setAge(int age) {
-		this.age = age;
+	public void setAge(int age) throws InvalidAgeException{
+		
+		if(age >= 16 && age <=70){
+			this.age = age;
+		} else {
+			throw new InvalidAgeException(age + "not valid");
+		}
 	}
 	public double getSalary() {
 		return salary;
