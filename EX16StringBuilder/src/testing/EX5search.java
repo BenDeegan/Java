@@ -14,14 +14,26 @@ public class EX5search {
 		chara = sc.next();
 		char c = chara.charAt(0);
 		
-		
-		for (int i = 0; i < word.length(); i++) {
-			if(word.indexOf(c) >=0){
-			System.out.println("Letter " + c + " was found at index "+ word.indexOf(c));
-		}
+		char [] arr = word.toCharArray();
+		for (int i = 0; i < arr.length; i++) {
+			if(arr[i] == c){
+				System.out.println("Letter " + c + " was found at index " + i);
+			}
+			
+			
+			
+//			
+//			if(word.indexOf(c) >=i){
+//				System.out.println(i);
+//			System.out.println("Letter " + c + " was found at index "+ word.indexOf(c, i));
+//
+//		}
+//			if(word.lastIndexOf(c) <=100){
+//				System.out.println("Letter "+ c + " was found at index" + word.lastIndexOf(c));
+//			}
 			
 		}
-			
+			sc.close();
 	}
 
 }
