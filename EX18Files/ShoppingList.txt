@@ -1,0 +1,3 @@
+cabbage 22.0
+lamb 12.0
+milk 24.0
